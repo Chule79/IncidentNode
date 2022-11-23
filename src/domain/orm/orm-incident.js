@@ -9,22 +9,13 @@ exports.GetAll = async () => {
     return await { err: { code: 123, message: error } };
   }
 };
-
-exports.Create = async (Title, Poster) => {
+exports.Create = async (req, res) => {
   try {
-    const data = await new conn.db.connMongo.Movie({
-        title: Title,
-        description: Description,
-        photos: Photos,
-        state: State,
-        responsibles: Responsibles, 
-        user: User,
-        departament: Departament
-    });
-    data.save();
-    return true;
+    const newIncident = new db.Incident(req.body);
+    const savedIncident = await newIncident.save();
+    return res.status(201).json(savedIncident);
   } catch (error) {
-    magic.LogDanger('Cannot Create incident', error);
+    magic.LogDanger('Incident create failed', error);
     return await { err: { code: 123, message: error } };
   }
 };
