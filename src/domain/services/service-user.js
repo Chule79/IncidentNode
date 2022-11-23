@@ -45,14 +45,7 @@ exports.Create = async (req, res) => {
   try {
     const { username, nickname, gmail, password, role, departmen } = req.body;
     if (username && nickname && gmail && password && role && department) {
-      let resOrm = await ormUser.Create(
-        username,
-        nickname,
-        gmail,
-        password,
-        role,
-        departmen
-      );
+      let resOrm = await ormUser.Register(req, res);
       if (resOrm.err) {
         (status = 'Failure'),
           (errorcode = resOrm.err.code),
