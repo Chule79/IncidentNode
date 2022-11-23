@@ -13,12 +13,12 @@ exports.GetAll = async (req, res) => {
     let resOrm = await ormUser.GetAll();
     if (resOrm.err) {
       (status = 'Failure'),
-        (errorcode = respOrm.err.code),
-        (message = respOrm.err.message),
+        (errorcode = resOrm.err.code),
+        (message = resOrm.err.message),
         (statuscode = enum_.CODE_BAD_REQUEST);
     } else {
-      (message = 'Success GetAll users'),
-        (data = respOrm),
+      (message = 'Success GetAll notice'),
+        (data = resOrm),
         (statuscode = data.length > 0 ? enum_.CODE_OK : enum_.CODE_NO_CONTENT);
     }
     response = await magic.ResponseService(status, errorcode, message, data);
@@ -43,16 +43,16 @@ exports.Create = async (req, res) => {
     statuscode = 0,
     response = {};
   try {
-    const { username, nickname, gmail, password, role, department } = req.body;
-    if (username && nickname && gmail && password && role && department) {
-      let resOrm = await ormUser.Register(req, res);
+    const { title, description } = req.body;
+    if (title && description) {
+      let resOrm = await ormNotice.Create(title, description);
       if (resOrm.err) {
         (status = 'Failure'),
           (errorcode = resOrm.err.code),
           (message = resOrm.err.messsage),
           (statuscode = enum_.CODE_BAD_REQUEST);
       } else {
-        (message = 'User created'), (statuscode = enum_.CODE_CREATED);
+        (message = 'Notice created'), (statuscode = enum_.CODE_CREATED);
       }
     } else {
       (status = 'Failure'),
