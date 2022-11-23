@@ -8,7 +8,6 @@ const db = conn.db.connMongo;
 
 exports.Register = async (req, res) => {
   try {
-    const { id } = req.params;
     const newUser = new db.User(req.body);
     const userExists = db.findOne({ nickname: newUser.nickname });
     if (userExists) return magic.LogDanger('User nickname is already in use');
@@ -58,35 +57,6 @@ exports.GetAll = async () => {
     return await conn.db.connMongo.User.find().populate('incidents');
   } catch (error) {
     magic.LogDanger('Cannot getAll users', error);
-    return await { err: { code: 123, message: error } };
-  }
-};
-
-exports.Create = async (
-  Username,
-  Nickname,
-  Gmail,
-  Password,
-  Role,
-  Image,
-  Department,
-  Incidents
-) => {
-  try {
-    const data = await new conn.db.connMongo.User({
-      username: Username,
-      nickname: Nickname,
-      gmail: Gmail,
-      password: Password,
-      role: Role,
-      image: Image,
-      department: Department,
-      incidents: Incidents,
-    });
-    data.save();
-    return true;
-  } catch (error) {
-    magic.LogDanger('Cannot Create user');
     return await { err: { code: 123, message: error } };
   }
 };
