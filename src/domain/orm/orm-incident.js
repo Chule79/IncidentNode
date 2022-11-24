@@ -55,7 +55,8 @@ exports.Create = async (req) => {
     if (req.file) {
       newIncident.photos = req.file.path;
     }
-    const savedIncident = await newIncident.save();
+    const newIncidentDB = db.Incident(req.body);
+    const savedIncident = await newIncidentDB.save();
     return savedIncident;
   } catch (err) {
     magic.LogDanger('Incident create failed', err);
