@@ -13,4 +13,8 @@ router.get('/notices', notice.GetAll);
 router.post('/incidents', incident.Create);
 router.get('/incidents', incident.GetAll);
 
+router.get('/incidents/:id', incident.GetOne);
+router.patch('/incidents/:id', incident.Update);
+router.delete('/incidents/:id', incident.Delete);
+
 module.exports = router;
