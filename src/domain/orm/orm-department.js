@@ -1,4 +1,4 @@
-const conn = require('../repostories/mongo.repository');
+const conn = require('../repositories/mongo.repository');
 const magic = require('../../utils/magic');
 
 exports.GetAll = async () => {

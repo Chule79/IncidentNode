@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 module.exports = (db) => {
   const userSchema = new db.Schema(

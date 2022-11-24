@@ -1,6 +1,6 @@
-import * as enum_ from './enum';
+const enum_ = require('./enum')
 
-export const ResponseService = async (status, errorCode, message, data) => {
+exports.ResponseService  = async (status, errorCode, message, data) => {
   return await {
     status: status,
     info: {
@@ -11,15 +11,15 @@ export const ResponseService = async (status, errorCode, message, data) => {
   };
 };
 
-export const LogSuccess = (msg) => {
+exports.LogSuccess = (msg) => {
   console.log(enum_.GREEN_LOG, msg);
 };
-export const LogInfo = (msg) => {
+exports.LogInfo = (msg) => {
   console.log(enum_.CYAN_LOG, msg);
 };
-export const LogWarning = (msg) => {
+exports.LogWarning = (msg) => {
   console.log(enum_.YELLOW_LOG, msg);
 };
-export const LogDanger = (msg) => {
+exports.LogDanger = (msg) => {
   console.log(enum_.RED_LOG, msg);
 };
