@@ -17,6 +17,9 @@ router.post('/notices', notice.Create);
 router.get('/notices', notice.GetAll);
 router.post('/incidents', incident.Create);
 router.get('/incidents', incident.GetAll);
+router.get('/notices/:id', notice.GetOne);
+router.patch('/notices/:id', notice.Update);
+router.delete('/notices/:id', notice.Delete);
 
 router.get('/incidents/:id', incident.GetOne);
 router.patch('/incidents/:id', incident.Update);
