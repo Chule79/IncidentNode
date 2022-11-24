@@ -50,17 +50,19 @@ exports.Create = async (req, res) => {
       state,
       responsibles,
       user,
-      departament,
+      department,
     } = req.body;
-    if (title && description && state && responsibles && user && departament) {
-      let res = await ormIncident.Create(req.body);
+    if (title && description && state && responsibles && user && department) {
+      let resOrm = await ormIncident.Create(req.body);
       if (resOrm.err) {
         (status = 'Failure'),
           (errorcode = resOrm.err.code),
           (message = resOrm.err.messsage),
           (statuscode = enum_.CODE_BAD_REQUEST);
       } else {
-        (message = 'Incident created'), (statuscode = enum_.CODE_CREATED);
+        (message = 'Incident created'),
+          (data = resOrm),
+          (statuscode = enum_.CODE_CREATED);
       }
     } else {
       (status = 'Failure'),

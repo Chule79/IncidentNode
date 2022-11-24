@@ -10,7 +10,7 @@ router.post('/departments', department.Create);
 router.get('/departments', department.GetAll);
 router.post('/notices', notice.Create);
 router.get('/notices', notice.GetAll);
-router.get('/incidents', incident.Create);
+router.post('/incidents', incident.Create);
 router.get('/incidents', incident.GetAll);
 
 module.exports = router;

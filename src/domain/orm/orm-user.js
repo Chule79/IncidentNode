@@ -59,7 +59,7 @@ exports.Login = async (req, res, next) => {
 
 exports.GetAll = async () => {
   try {
-    return await db.User.find();
+    return await db.User.find().populate('department incidents');
   } catch (err) {
     magic.LogDanger('Cannot getAll users', err);
     return await { err: { code: 123, message: err } };

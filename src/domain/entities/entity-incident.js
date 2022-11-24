@@ -5,7 +5,7 @@ module.exports = (db) => {
     {
       title: { type: String, require: true },
       description: { type: String, require: true },
-      photos: [{ type: String, require: false }],
+      photos: [{ type: String } ],
       state: { type: String, require: true },
       responsibles: [
         { type: mongoose.Schema.Types.ObjectId, ref: 'user', require: true },
@@ -15,7 +15,7 @@ module.exports = (db) => {
         ref: 'user',
         require: true,
       },
-      departament: {
+      department: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'department',
         require: true,
