@@ -6,7 +6,7 @@ const magic = require('../../utils/magic');
 
 const db = conn.db.connMongo;
 
-exports.Register = async (req, res) => {
+exports.Create = async (req, res) => {
   try {
     const newUser = new db.User(req.body);
     const userExists = db.findOne({ nickname: newUser.nickname });
