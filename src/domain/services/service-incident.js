@@ -10,11 +10,11 @@ exports.GetAll = async (req, res) => {
   let statuscode = 0;
   let response = {};
   try {
-    let res = await ormIncident.GetAll();
-    if (res.err) {
+    let resOrm = await ormIncident.GetAll();
+    if (resOrm.err) {
       (status = 'Failure'),
-        (errorcode = res.err.code),
-        (message = res.err.message),
+        (errorcode = resOrm.err.code),
+        (message = resOrm.err.message),
         (statuscode = enum_.CODE_BAD_REQUEST);
     } else {
       (message = 'Success GetAll incidents'),
@@ -55,7 +55,7 @@ exports.Create = async (req, res) => {
         user,
         departament
       );
-      if (res.err) {
+      if (resOrm.err) {
 
         (status = 'Failure'),
           (errorcode = resOrm.err.code),
