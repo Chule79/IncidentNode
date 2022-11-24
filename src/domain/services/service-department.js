@@ -45,14 +45,14 @@ exports.Create = async (req, res) => {
   try {
     const { name } = req.body;
     if (name) {
-      let resOrm = await ormDepartment.Create(req, res);
+      let resOrm = await ormDepartment.Create(req.body);
       if (resOrm.err) {
         (status = 'Failure'),
           (errorcode = resOrm.err.code),
           (message = resOrm.err.messsage),
           (statuscode = enum_.CODE_BAD_REQUEST);
       } else {
-        (message = 'Department created'), (statuscode = enum_.CODE_CREATED);
+        (message = 'Department created'), (statuscode = enum_.CODE_CREATED), (data = resOrm);
       }
     } else {
       (status = 'Failure'),

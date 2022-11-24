@@ -45,7 +45,7 @@ exports.Create = async (req, res) => {
   try {
     const { title, description, department } = req.body;
     if (title && description) {
-      let res = await ormNotice.Create(title, description, department);
+      let res = await ormNotice.Create(req.body);
       if (res.err) {
         (status = 'Failure'),
           (errorcode = resOrm.err.code),
