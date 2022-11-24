@@ -1,6 +1,6 @@
 const magic = require('../../utils/magic');
 const enum_ = require('../../utils/enum');
-const ormUser = require('../../domain/orm/orm-user');
+const ormNotice = require('../../domain/orm/orm-notice');
 
 exports.GetAll = async (req, res) => {
   let status = 'Success';
@@ -10,18 +10,18 @@ exports.GetAll = async (req, res) => {
   let statuscode = 0;
   let response = {};
   try {
-    let resOrm = await ormUser.GetAll();
+    let resOrm = await ormNotice.GetAll();
     if (resOrm.err) {
       (status = 'Failure'),
         (errorcode = resOrm.err.code),
         (message = resOrm.err.message),
         (statuscode = enum_.CODE_BAD_REQUEST);
     } else {
-      (message = 'Success GetAll users'),
+      (message = 'Success GetAll notice'),
         (data = resOrm),
         (statuscode = data.length > 0 ? enum_.CODE_OK : enum_.CODE_NO_CONTENT);
     }
-    response = await magic.ResponseService(req);
+    response = await magic.ResponseService(status, errorcode, message, data);
     return res.status(statuscode).send(response);
   } catch (err) {
     magic.LogDanger('err: ', err);
@@ -43,16 +43,16 @@ exports.Create = async (req, res) => {
     statuscode = 0,
     response = {};
   try {
-    const { username, nickname, gmail, password, role, department } = req.body;
-    if (username && nickname && gmail && password && role && department) {
-      let resOrm = await ormUser.Create(req.body);
+    const { title, description, department } = req.body;
+    if (title && description) {
+      let resOrm = await ormNotice.Create(req.body);
       if (resOrm.err) {
         (status = 'Failure'),
           (errorcode = resOrm.err.code),
           (message = resOrm.err.messsage),
           (statuscode = enum_.CODE_BAD_REQUEST);
       } else {
-        (message = 'User created'),
+        (message = 'Notice created'),
           (data = resOrm),
           (statuscode = enum_.CODE_CREATED);
       }
