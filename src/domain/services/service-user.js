@@ -21,7 +21,7 @@ exports.GetAll = async (req, res) => {
         (data = resOrm),
         (statuscode = data.length > 0 ? enum_.CODE_OK : enum_.CODE_NO_CONTENT);
     }
-    response = await magic.ResponseService(status, errorcode, message, data);
+    response = await magic.ResponseService(req);
     return res.status(statuscode).send(response);
   } catch (err) {
     magic.LogDanger('err: ', err);
