@@ -1,6 +1,6 @@
 const magic = require('../../utils/magic');
 const enum_ = require('../../utils/enum');
-const ormUser = require('../../domain/orm/orm-user');
+const ormNotice = require('../../domain/orm/orm-notice');
 
 exports.GetAll = async (req, res) => {
   let status = 'Success';
@@ -10,7 +10,7 @@ exports.GetAll = async (req, res) => {
   let statuscode = 0;
   let response = {};
   try {
-    let resOrm = await ormUser.GetAll();
+    let resOrm = await ormNotice.GetAll();
     if (resOrm.err) {
       (status = 'Failure'),
         (errorcode = resOrm.err.code),
@@ -45,14 +45,16 @@ exports.Create = async (req, res) => {
   try {
     const { title, description, department } = req.body;
     if (title && description) {
-      let res = await ormNotice.Create(req.body);
-      if (res.err) {
+      let resOrm = await ormNotice.Create(req.body);
+      if (resOrm.err) {
         (status = 'Failure'),
           (errorcode = resOrm.err.code),
           (message = resOrm.err.messsage),
           (statuscode = enum_.CODE_BAD_REQUEST);
       } else {
-        (message = 'Notice created'), (statuscode = enum_.CODE_CREATED);
+        (message = 'Notice created'),
+          (data = resOrm),
+          (statuscode = enum_.CODE_CREATED);
       }
     } else {
       (status = 'Failure'),

@@ -11,6 +11,7 @@ exports.GetAll = async () => {
     return await { err: { code: 123, message: err } };
   }
 };
+
 exports.Create = async (info) => {
   try {
     const newIncident = new db.Incident(info);
