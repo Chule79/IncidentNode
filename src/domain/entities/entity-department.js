@@ -8,7 +8,6 @@ module.exports = (db) => {
         {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'user',
-          required: true,
         },
       ],
       incidents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'incident' }],

@@ -6,6 +6,6 @@ app.listen(config.port, () => {
   magic.LogInfo(`Server running on http://localhost:${config.port}`);
 });
 
-app.on('error', (err) => {
+app.on('err', (err) => {
   magic.LogDanger(err);
 });

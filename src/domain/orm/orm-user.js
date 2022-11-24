@@ -6,24 +6,29 @@ const magic = require('../../utils/magic');
 
 const db = conn.db.connMongo;
 
-exports.Create = async (req, res) => {
+exports.Create = async (info) => {
   try {
-    const newUser = new db.User(req.body);
-    const userExists = db.findOne({ nickname: newUser.nickname });
-    if (userExists) return magic.LogDanger('User nickname is already in use');
+    const newUser = new db.User(info);
+
+    const userNickname = await db.User.findOne({ nickname: info.nickname });
+    const userGmail = await db.User.findOne({ gmail: info.gmail });
+    const userExists = userNickname || userGmail;
+    if (userExists) return magic.LogDanger('That user already exists');
+
+    newUser.password = bcrypt.hashSync(newUser.password, 16);
     const savedUser = await newUser.save();
-    return res.status(201).json(savedUser);
-  } catch (error) {
-    magic.LogDanger('User register failed', error);
-    return await { err: { code: 123, message: error } };
+    return savedUser;
+  } catch (err) {
+    magic.LogDanger('User register failed', err);
+    return await { err: { code: 123, message: err } };
   }
 };
 
 exports.Login = async (req, res, next) => {
   try {
-    const userNickname = await db.findOne({ nickname: req.body.nickname });
-    const userGmail = await db.findOne({ nickname: req.body.nickname });
-    const userInDB = !userNickname || !userGmail;
+    const userNickname = await db.User.findOne({ nickname: info.nickname });
+    const userGmail = await db.User.findOne({ gmail: info.gmail });
+    const userInDB = userNickname || userGmail;
     if (userInDB) return magic.LogDanger("Login credentials doesn't exist");
     if (bcrypt.compareSync(req.body.password, userInDB.password)) {
       userInDB.password = null;
@@ -46,17 +51,17 @@ exports.Login = async (req, res, next) => {
     } else {
       return next('User password incorrect');
     }
-  } catch (error) {
-    magic.LogDanger('User login failed', error);
-    return await { err: { code: 123, message: error } };
+  } catch (err) {
+    magic.LogDanger('User login failed', err);
+    return await { err: { code: 123, message: err } };
   }
 };
 
 exports.GetAll = async () => {
   try {
-    return await conn.db.connMongo.User.find().populate('incidents');
-  } catch (error) {
-    magic.LogDanger('Cannot getAll users', error);
-    return await { err: { code: 123, message: error } };
+    return await db.User.find();
+  } catch (err) {
+    magic.LogDanger('Cannot getAll users', err);
+    return await { err: { code: 123, message: err } };
   }
 };

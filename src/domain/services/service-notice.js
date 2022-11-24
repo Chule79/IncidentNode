@@ -23,12 +23,12 @@ exports.GetAll = async (req, res) => {
     }
     response = await magic.ResponseService(status, errorcode, message, data);
     return res.status(statuscode).send(response);
-  } catch (error) {
-    magic.LogDanger('error: ', error);
+  } catch (err) {
+    magic.LogDanger('err: ', err);
     response = await magic.ResponseService(
       'Failure',
       enum_.CODE_BAD_REQUEST,
-      error,
+      err,
       ''
     );
     return res.status(enum_.CODE_INTERNAL_SERVER_ERROR).send(response);
@@ -45,7 +45,7 @@ exports.Create = async (req, res) => {
   try {
     const { title, description, department } = req.body;
     if (title && description) {
-      let res = await ormNotice.Create(title, description, department);
+      let res = await ormNotice.Create(req.body);
       if (res.err) {
         (status = 'Failure'),
           (errorcode = resOrm.err.code),
@@ -62,7 +62,7 @@ exports.Create = async (req, res) => {
     }
     response = await magic.ResponseService(status, errorcode, message, data);
     return res.status(statuscode).send(response);
-  } catch (error) {
+  } catch (err) {
     console.log('err = ', err);
     return res
       .status(enum_.CODE_INTERNAL_SERVER_ERROR)

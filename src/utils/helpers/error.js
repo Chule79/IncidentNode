@@ -1,8 +1,8 @@
 const setError = (code, message) => {
-  const error = new Error();
-  error.code = code;
-  error.message = message;
-  return error;
+  const err = new err();
+  err.code = code;
+  err.message = message;
+  return err;
 };
 
 module.exports = { setError };

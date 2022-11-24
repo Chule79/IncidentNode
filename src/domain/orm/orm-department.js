@@ -1,27 +1,25 @@
 const conn = require('../repositories/mongo.repository');
 const magic = require('../../utils/magic');
 
+const db = conn.db.connMongo;
+
 exports.GetAll = async () => {
   try {
-    return await conn.db.connMongo.Department.find();
-  } catch (error) {
-    magic.LogDanger('Cannot getAll departments', error);
-    return await { err: { code: 123, message: error } };
+    return await db.Department.find();
+  } catch (err) {
+    magic.LogDanger('Cannot getAll departments', err);
+    return await { err: { code: 123, message: err } };
   }
 };
 
-exports.Create = async (Name, Users, Incidents, Notices) => {
+exports.Create = async (info) => {
   try {
-    const data = await new conn.db.connMongo.Department({
-      name: Name,
-      users: Users,
-      incidents: Incidents,
-      notices: Notices,
-    });
+    const { name, users, incidents, notices } = info;
+    const data = await new db.Department(info);
     data.save();
-    return true;
-  } catch (error) {
-    magic.LogDanger('Cannot create department', error);
-    return await { err: { code: 123, message: error } };
+    return data;
+  } catch (err) {
+    magic.LogDanger('Cannot create department', err);
+    return await { err: { code: 123, message: err } };
   }
 };

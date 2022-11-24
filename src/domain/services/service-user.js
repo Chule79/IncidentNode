@@ -21,14 +21,14 @@ exports.GetAll = async (req, res) => {
         (data = resOrm),
         (statuscode = data.length > 0 ? enum_.CODE_OK : enum_.CODE_NO_CONTENT);
     }
-    response = await magic.ResponseService(status, errorcode, message, data);
+    response = await magic.ResponseService(req);
     return res.status(statuscode).send(response);
-  } catch (error) {
-    magic.LogDanger('error: ', error);
+  } catch (err) {
+    magic.LogDanger('err: ', err);
     response = await magic.ResponseService(
       'Failure',
       enum_.CODE_BAD_REQUEST,
-      error,
+      err,
       ''
     );
     return res.status(enum_.CODE_INTERNAL_SERVER_ERROR).send(response);
@@ -45,14 +45,16 @@ exports.Create = async (req, res) => {
   try {
     const { username, nickname, gmail, password, role, department } = req.body;
     if (username && nickname && gmail && password && role && department) {
-      let resOrm = await ormUser.Create(req, res);
+      let resOrm = await ormUser.Create(req.body);
       if (resOrm.err) {
         (status = 'Failure'),
           (errorcode = resOrm.err.code),
           (message = resOrm.err.messsage),
           (statuscode = enum_.CODE_BAD_REQUEST);
       } else {
-        (message = 'User created'), (statuscode = enum_.CODE_CREATED);
+        (message = 'User created'),
+          (data = resOrm),
+          (statuscode = enum_.CODE_CREATED);
       }
     } else {
       (status = 'Failure'),
@@ -62,7 +64,7 @@ exports.Create = async (req, res) => {
     }
     response = await magic.ResponseService(status, errorcode, message, data);
     return res.status(statuscode).send(response);
-  } catch (error) {
+  } catch (err) {
     console.log('err = ', err);
     return res
       .status(enum_.CODE_INTERNAL_SERVER_ERROR)

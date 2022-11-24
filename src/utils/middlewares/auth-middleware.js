@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const { setError } = require('../helpers/error');
+const { setError } = require('../helpers/err');
 
 const isAuth = (req, res, next) => {
   const authorization = req.headers.authorization;
@@ -16,7 +16,7 @@ const isAuth = (req, res, next) => {
 
   try {
     var token = jwt.verify(jwtStringify, req.app.get('secretKey'));
-  } catch (error) {
+  } catch (err) {
     return next(setError(500, 'Token invalid'));
   }
 
