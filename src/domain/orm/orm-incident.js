@@ -4,9 +4,9 @@ const magic = require('../../utils/magic');
 exports.GetAll = async () => {
   try {
     return await conn.db.connMongo.Incident.find();
-  } catch (error) {
-    magic.LogDanger('Cannot getAll incidents', error);
-    return await { err: { code: 123, message: error } };
+  } catch (err) {
+    magic.LogDanger('Cannot getAll incidents', err);
+    return await { err: { code: 123, message: err } };
   }
 };
 exports.Create = async (req, res) => {
@@ -14,8 +14,8 @@ exports.Create = async (req, res) => {
     const newIncident = new db.Incident(req.body);
     const savedIncident = await newIncident.save();
     return res.status(201).json(savedIncident);
-  } catch (error) {
-    magic.LogDanger('Incident create failed', error);
-    return await { err: { code: 123, message: error } };
+  } catch (err) {
+    magic.LogDanger('Incident create failed', err);
+    return await { err: { code: 123, message: err } };
   }
 };

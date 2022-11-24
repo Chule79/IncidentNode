@@ -13,9 +13,9 @@ exports.Create = async (req, res) => {
     if (userExists) return magic.LogDanger('User nickname is already in use');
     const savedUser = await newUser.save();
     return res.status(201).json(savedUser);
-  } catch (error) {
-    magic.LogDanger('User register failed', error);
-    return await { err: { code: 123, message: error } };
+  } catch (err) {
+    magic.LogDanger('User register failed', err);
+    return await { err: { code: 123, message: err } };
   }
 };
 
@@ -46,17 +46,17 @@ exports.Login = async (req, res, next) => {
     } else {
       return next('User password incorrect');
     }
-  } catch (error) {
-    magic.LogDanger('User login failed', error);
-    return await { err: { code: 123, message: error } };
+  } catch (err) {
+    magic.LogDanger('User login failed', err);
+    return await { err: { code: 123, message: err } };
   }
 };
 
 exports.GetAll = async () => {
   try {
     return await conn.db.connMongo.User.find().populate('incidents');
-  } catch (error) {
-    magic.LogDanger('Cannot getAll users', error);
-    return await { err: { code: 123, message: error } };
+  } catch (err) {
+    magic.LogDanger('Cannot getAll users', err);
+    return await { err: { code: 123, message: err } };
   }
 };
