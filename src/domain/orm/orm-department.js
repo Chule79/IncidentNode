@@ -23,3 +23,43 @@ exports.Create = async (info) => {
     return await { err: { code: 123, message: err } };
   }
 };
+
+exports.GetOne = async (req) => {
+  try {
+    const { id } = req.params;
+    const department = await db.Department.findById(id);
+    if (!department) return magic.LogDanger('Cannot get the department');
+    return department;
+  } catch (err) {
+    magic.LogDanger('Cannot get the department', err);
+    return await { err: { code: 123, message: err } };
+  }
+};
+
+exports.Update = async (req) => {
+  try {
+    const { id } = req.params;
+    const department = new db.Department(req.body);
+    department._id = id;
+    const updatedDepartment = await db.Department.findByIdAndUpdate(
+      id,
+      department
+    );
+    console.log(updatedDepartment);
+    return updatedDepartment;
+  } catch (err) {
+    magic.LogDanger('Cannot update the department', err);
+    return await { err: { code: 123, message: err } };
+  }
+};
+
+exports.Delete = async (req) => {
+  try {
+    const { id } = req.params;
+    const deletedDepartment = await db.Department.findByIdAndDelete(id);
+    return deletedDepartment;
+  } catch (err) {
+    magic.LogDanger('Cannot delete the department', err);
+    return await { err: { code: 123, message: err } };
+  }
+};
