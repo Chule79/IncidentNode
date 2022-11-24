@@ -43,8 +43,8 @@ exports.Create = async (req, res) => {
     statuscode = 0,
     response = {};
   try {
-    const { name, users } = req.body;
-    if (name && users) {
+    const { name } = req.body;
+    if (name) {
       let resOrm = await ormDepartment.Register(req, res);
       if (resOrm.err) {
         (status = 'Failure'),
@@ -63,7 +63,7 @@ exports.Create = async (req, res) => {
     response = await magic.ResponseService(status, errorcode, message, data);
     return res.status(statuscode).send(response);
   } catch (error) {
-    console.log('err = ', err);
+    console.log('err = ', error);
     return res
       .status(enum_.CODE_INTERNAL_SERVER_ERROR)
       .send(
