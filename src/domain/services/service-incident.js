@@ -45,7 +45,7 @@ exports.Create = async (req, res) => {
   try {
     const { title, description, photos, state, responsibles, user, departament } = req.body;
     if (title && description && state && responsibles && user && departament) {
-      let resOrm = await ormIncident.Create(
+      let res = await ormIncident.Create(
         title,
         description,
         photos,
@@ -53,7 +53,7 @@ exports.Create = async (req, res) => {
         user,
         departament
       );
-      if (resOrm.err) {
+      if (res.err) {
         (status = 'Failure'),
           (errorcode = resOrm.err.code),
           (message = resOrm.err.messsage),
