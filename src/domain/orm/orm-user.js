@@ -24,12 +24,14 @@ exports.Create = async (info) => {
   }
 };
 
-exports.Login = async (req, res, next) => {
+exports.Login = async (req) => {
   try {
-    const userNickname = await db.User.findOne({ nickname: info.nickname });
-    const userGmail = await db.User.findOne({ gmail: info.gmail });
-    const userInDB = userNickname || userGmail;
-    if (userInDB) return magic.LogDanger("Login credentials doesn't exist");
+    const userByNickname = await db.User.findOne({
+      nickname: req.body.nickname,
+    });
+    const userByGmail = await db.User.findOne({ gmail: req.body.gmail });
+    const userInDB = userByNickname || userByGmail;
+    if (!userInDB) return magic.LogDanger("Login credentials doesn't exist");
     if (bcrypt.compareSync(req.body.password, userInDB.password)) {
       userInDB.password = null;
       const token = jwt.sign(
@@ -37,17 +39,12 @@ exports.Login = async (req, res, next) => {
           id: userInDB._id,
           nickname: userInDB.nickname,
         },
-        req.app.get.get('secretKey'),
+        req.app.get('secretKey'),
         {
           expiresIn: '1h',
         }
       );
-      return res.json({
-        status: 200,
-        message: 'Welcome user',
-        user: userInDB,
-        token: token,
-      });
+      return { user: userInDB, token: token };
     } else {
       return next('User password incorrect');
     }
