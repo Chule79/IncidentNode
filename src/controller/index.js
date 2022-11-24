@@ -4,6 +4,7 @@ const department = require('../domain/services/service-department');
 const notice = require('../domain/services/service-notice');
 const incident = require('../domain/services/service-incident');
 const isAuth = require('../utils/middlewares/auth-middleware');
+const upload = require('../utils/middlewares/file');
 
 router.post('/users/register', user.Create);
 router.post('/users/login', user.Login);
@@ -15,7 +16,7 @@ router.patch('/departments/:id', department.Update);
 router.delete('/departments/:id', department.Delete);
 router.post('/notices', notice.Create);
 router.get('/notices', notice.GetAll);
-router.post('/incidents', incident.Create);
+router.post('/incidents', upload.single('photos'), incident.Create);
 router.get('/incidents', incident.GetAll);
 router.get('/notices/:id', notice.GetOne);
 router.patch('/notices/:id', notice.Update);
