@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const conn = require('../repostories/mongo.repository');
+const conn = require('../repositories/mongo.repository');
 const magic = require('../../utils/magic');
 
 const db = conn.db.connMongo;

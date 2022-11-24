@@ -6,11 +6,11 @@ const incident = require('../domain/services/service-incident');
 
 router.post('/users', user.Create);
 router.get('/users', user.GetAll);
-router.port('/departments', department.Create);
+router.post('/departments', department.Create);
 router.get('/departments', department.GetAll);
 router.post('/notices', notice.Create);
 router.get('/notices', notice.GetAll);
-router.get('/incidents', incidents.Create);
-router.get('/incidents', incidents.GetAll);
+router.get('/incidents', incident.Create);
+router.get('/incidents', incident.GetAll);
 
 module.exports = router;
