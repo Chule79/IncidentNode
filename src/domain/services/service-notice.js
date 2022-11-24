@@ -43,10 +43,10 @@ exports.Create = async (req, res) => {
     statuscode = 0,
     response = {};
   try {
-    const { title, description } = req.body;
+    const { title, description, department } = req.body;
     if (title && description) {
-      let resOrm = await ormNotice.Create(title, description);
-      if (resOrm.err) {
+      let res = await ormNotice.Create(title, description, department);
+      if (res.err) {
         (status = 'Failure'),
           (errorcode = resOrm.err.code),
           (message = resOrm.err.messsage),
