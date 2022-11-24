@@ -5,7 +5,7 @@ const db = conn.db.connMongo;
 
 exports.GetAll = async () => {
   try {
-    return await db.Incident.find();
+    return await db.Incident.find().populate("responsibles user department");
   } catch (err) {
     magic.LogDanger('Cannot getAll incidents', err);
     return await { err: { code: 123, message: err } };

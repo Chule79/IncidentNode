@@ -50,9 +50,9 @@ exports.Create = async (req, res) => {
       state,
       responsibles,
       user,
-      departament,
+      department,
     } = req.body;
-    if (title && description && state && responsibles && user && departament) {
+    if (title && description && state && responsibles && user && department) {
       let resOrm = await ormIncident.Create(req.body);
       if (resOrm.err) {
         (status = 'Failure'),

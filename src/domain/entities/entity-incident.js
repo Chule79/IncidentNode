@@ -15,7 +15,7 @@ module.exports = (db) => {
         ref: 'user',
         require: true,
       },
-      departament: {
+      department: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'department',
         require: true,
