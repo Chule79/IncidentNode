@@ -98,7 +98,7 @@ exports.Delete = async (req, res) => {
   let data = '';
   let statuscode = 0;
   let response = {};
-  try {
+  try {    
     let resOrm = await ormIncident.Delete(req);
     if (resOrm.err) {
       (status = 'Failure'),
