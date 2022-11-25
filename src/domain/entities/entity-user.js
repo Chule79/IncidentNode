@@ -7,7 +7,9 @@ module.exports = (db) => {
       nickname: { type: String, required: true, unique: true },
       gmail: { type: String, required: true, unique: true },
       password: { type: String, required: true },
+
       role: { type: String, enum: ['user', 'admin'], required: true },
+
       image: { type: String },
       department: {
         type: mongoose.Schema.Types.ObjectId,
@@ -20,6 +22,5 @@ module.exports = (db) => {
       timestamps: true,
     }
   );
-
   return db.model('user', userSchema);
 };

@@ -113,6 +113,7 @@ exports.Login = async (req, res) => {
   }
 };
 
+
 exports.Update = async (req, res) => {
   let status = 'Success',
     errorcode = '',
@@ -205,3 +206,4 @@ exports.GetOne = async (req, res) => {
       );
   }
 };
+
