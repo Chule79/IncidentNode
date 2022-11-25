@@ -1,10 +1,8 @@
 const jwt = require('jsonwebtoken');
 
-
 const { setError } = require('../helpers/error');
 
-
-const isAuth = (req, res, next) => {
+const isAdmin = (req, res, next) => {
   const authorization = req.headers.authorization;
 
   if (!authorization) return res.json(setError(401, 'Not authorized'));
@@ -17,9 +15,9 @@ const isAuth = (req, res, next) => {
   const jwtStringify = splits[1];
 
   try {
-    var token = jwt.verify(jwtStringify, req.app.get('secretKey'));
+    var token = jwt.verify(jwtStringify, req.app.get('adminSecretKey'));
   } catch (err) {
-    return next(setError(500, 'Token invalid'));
+    return res.json(setError(500, 'Token invalid'));
   }
 
   const authority = {
@@ -32,4 +30,4 @@ const isAuth = (req, res, next) => {
   next();
 };
 
-module.exports = { isAuth };
+module.exports = { isAdmin };
