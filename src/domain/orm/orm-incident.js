@@ -1,11 +1,15 @@
 const conn = require('../repositories/mongo.repository');
 const magic = require('../../utils/magic');
+
 const {deleteFile} = require('../../utils/middlewares/delete-file')
+
 const db = conn.db.connMongo;
 
 exports.GetAll = async () => {
   try {
+
     return await db.Incident.find().populate('responsibles user department');
+
   } catch (err) {
     magic.LogDanger('Cannot getAll incidents', err);
     return await { err: { code: 123, message: err } };
@@ -60,6 +64,7 @@ exports.Create = async (req) => {
     if (req.file) {
       newIncident.photos = req.file.path;
     }
+
     const savedIncident = await newIncident.save();
     return savedIncident;
   } catch (err) {
