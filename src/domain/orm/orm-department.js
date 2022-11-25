@@ -24,6 +24,7 @@ exports.Create = async (info) => {
   }
 };
 
+
 exports.GetOne = async (req) => {
   try {
     const { id } = req.params;
@@ -63,3 +64,4 @@ exports.Delete = async (req) => {
     return await { err: { code: 123, message: err } };
   }
 };
+

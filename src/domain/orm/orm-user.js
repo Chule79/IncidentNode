@@ -32,6 +32,7 @@ exports.Login = async (req) => {
     const userByGmail = await db.User.findOne({ gmail: req.body.gmail });
     const userInDB = userByNickname || userByGmail;
     if (!userInDB) return magic.LogDanger("Login credentials doesn't exist");
+
     if (bcrypt.compareSync(req.body.password, userInDB.password)) {
       userInDB.password = null;
       const token = jwt.sign(
