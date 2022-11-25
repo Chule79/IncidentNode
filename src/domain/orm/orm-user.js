@@ -63,3 +63,50 @@ exports.GetAll = async () => {
     return await { err: { code: 123, message: err } };
   }
 };
+
+exports.Update = async (req) => {
+  try {
+    const { id } = req.params;
+    const user = new db.User(req.body);
+    user._id = id;
+    const updatedUser = await db.User.findByIdAndUpdate(id, user);
+    return updatedUser;
+  } catch (err) {
+    console.log('err = ', err);
+    return res
+      .status(enum_.CODE_INTERNAL_SERVER_ERROR)
+      .send(
+        await magic.ResponseService('Failure', enum_.CRASH_LOGIC, 'err', '')
+      );
+  }
+};
+
+exports.Delete = async (req) => {
+  try {
+    const { id } = req.params;
+    const deletedUser = await db.User.findByIdAndDelete(id);
+    return deletedUser;
+  } catch (err) {
+    console.log('err = ', err);
+    return res
+      .status(enum_.CODE_INTERNAL_SERVER_ERROR)
+      .send(
+        await magic.ResponseService('Failure', enum_.CRASH_LOGIC, 'err', '')
+      );
+  }
+};
+
+exports.GetOne = async (req) => {
+  try {
+    const { id } = req.params;
+    const user = await db.User.findById(id);
+    return user;
+  } catch (err) {
+    console.log('err = ', err);
+    return res
+      .status(enum_.CODE_INTERNAL_SERVER_ERROR)
+      .send(
+        await magic.ResponseService('Failure', enum_.CRASH_LOGIC, 'err', '')
+      );
+  }
+};
