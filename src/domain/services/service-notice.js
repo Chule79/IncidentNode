@@ -73,3 +73,108 @@ exports.Create = async (req, res) => {
       );
   }
 };
+
+exports.GetOne = async (req, res) => {
+  let status = 'Success';
+  let errorcode = '';
+  let message = '';
+  let data = '';
+  let statuscode = 0;
+  let response = {};
+  try {
+    let resOrm = await ormNotice.GetOne(req);
+    console.log('data', resOrm);
+    if (resOrm.err) {
+      (status = 'Failure'),
+        (errorcode = resOrm.err.code),
+        (message = resOrm.err.message),
+        (statuscode = enum_.CODE_BAD_REQUEST);
+    } else {
+      (message = 'Success get notice'),
+        (data = resOrm),
+        (statuscode =
+          Object.keys(data).length > 0 ? enum_.CODE_OK : enum_.CODE_NO_CONTENT);
+    }
+    response = await magic.ResponseService(status, errorcode, message, data);
+    return res.status(statuscode).send(response);
+  } catch (err) {
+    magic.LogDanger('err: ', err);
+    response = await magic.ResponseService(
+      'Failure',
+      enum_.CODE_BAD_REQUEST,
+      err,
+      ''
+    );
+    return res.status(enum_.CODE_INTERNAL_SERVER_ERROR).send(response);
+  }
+};
+
+exports.Update = async (req, res) => {
+  let status = 'Success';
+  let errorcode = '';
+  let message = '';
+  let data = '';
+  let statuscode = 0;
+  let response = {};
+  try {
+    let resOrm = await ormNotice.Update(req);
+    if (resOrm.err) {
+      (status = 'Failure'),
+        (errorcode = resOrm.err.code),
+        (message = resOrm.err.message),
+        (statuscode = enum_.CODE_BAD_REQUEST);
+    } else {
+      (message = 'Success updated notice'),
+        (data = resOrm),
+        (statuscode =
+          Object.keys(data).length > 0 ? enum_.CODE_OK : enum_.CODE_NO_CONTENT);
+    }
+    response = await magic.ResponseService(status, errorcode, message, data);
+    return res.status(statuscode).send(response);
+  } catch (err) {
+    magic.LogDanger('err: ', err);
+    response = await magic.ResponseService(
+      'Failure',
+      enum_.CODE_BAD_REQUEST,
+      err,
+      ''
+    );
+    return res.status(enum_.CODE_INTERNAL_SERVER_ERROR).send(response);
+  }
+};
+
+exports.Delete = async (req, res) => {
+  let status = 'Success';
+  let errorcode = '';
+  let message = '';
+  let data = '';
+  let statuscode = 0;
+  let response = {};
+  try {
+    let resOrm = await ormNotice.Delete(req);
+    console.log(resOrm);
+    if (resOrm.err) {
+      (status = 'Failure'),
+        (errorcode = resOrm.err.code),
+        (message = resOrm.err.message),
+        (statuscode = enum_.CODE_BAD_REQUEST);
+    } else {
+      (message = 'Success updated notice'),
+        (data = resOrm),
+        (statuscode =
+          Object.keys(data).length > 0 ? enum_.CODE_OK : enum_.CODE_NO_CONTENT);
+    }
+    response = await magic.ResponseService(status, errorcode, message, data);
+    return res.status(statuscode).send(response);
+  } catch (err) {
+    magic.LogDanger('err: ', err);
+    response = await magic.ResponseService(
+      'Failure',
+      enum_.CODE_BAD_REQUEST,
+      err,
+      ''
+    );
+    return res.status(enum_.CODE_INTERNAL_SERVER_ERROR).send(response);
+  }
+};
+
