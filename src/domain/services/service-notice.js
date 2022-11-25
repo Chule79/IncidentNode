@@ -92,15 +92,10 @@ exports.GetOne = async (req, res) => {
     } else {
       (message = 'Success get notice'),
         (data = resOrm),
-        console.log(data)(
-          (statuscode =
-            Object.keys(data).length > 0
-              ? enum_.CODE_OK
-              : enum_.CODE_NO_CONTENT)
-        );
+        (statuscode =
+          Object.keys(data).length > 0 ? enum_.CODE_OK : enum_.CODE_NO_CONTENT);
     }
     response = await magic.ResponseService(status, errorcode, message, data);
-    console.log(response);
     return res.status(statuscode).send(response);
   } catch (err) {
     magic.LogDanger('err: ', err);
