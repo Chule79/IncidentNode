@@ -1,5 +1,6 @@
 const setError = (code, message) => {
-  const err = new err();
+  console.log(code, message);
+  const err = new Error();
   err.code = code;
   err.message = message;
   return err;

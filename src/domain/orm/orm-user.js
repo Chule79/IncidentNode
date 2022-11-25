@@ -34,18 +34,36 @@ exports.Login = async (req) => {
     if (!userInDB) return magic.LogDanger("Login credentials doesn't exist");
 
     if (bcrypt.compareSync(req.body.password, userInDB.password)) {
+      console.log('password');
       userInDB.password = null;
-      const token = jwt.sign(
+      const userToken = jwt.sign(
         {
           id: userInDB._id,
           nickname: userInDB.nickname,
+          role: userInDB.role,
         },
-        req.app.get('secretKey'),
+        req.app.get('userSecretKey'),
         {
           expiresIn: '1h',
         }
       );
-      return { user: userInDB, token: token };
+      const adminToken = jwt.sign(
+        {
+          id: userInDB._id,
+          nickname: userInDB.nickname,
+          role: userInDB.role,
+        },
+        req.app.get('adminSecretKey'),
+        {
+          expiresIn: '1h',
+        }
+      );
+      console.log(userToken, adminToken);
+      if (userInDB.role === 'admin') {
+        return { user: userInDB, token: adminToken };
+      } else {
+        return { user: userInDB, token: userToken };
+      }
     } else {
       return next('User password incorrect');
     }
