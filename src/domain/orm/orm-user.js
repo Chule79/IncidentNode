@@ -6,18 +6,22 @@ const magic = require('../../utils/magic');
 
 const db = conn.db.connMongo;
 
-exports.Create = async (info) => {
-  try {
-    const newUser = new db.User(info);
-
-    const userNickname = await db.User.findOne({ nickname: info.nickname });
-    const userGmail = await db.User.findOne({ gmail: info.gmail });
+exports.Create = async (req) => {
+  try { 
+    const newUser = new db.User(req.body);
+    console.log(newUser);
+    const userNickname = await db.User.findOne({ nickname: newUser.nickname });
+    const userGmail = await db.User.findOne({ gmail: newUser.gmail });
     const userExists = userNickname || userGmail;
     if (userExists) return magic.LogDanger('That user already exists');
-
     newUser.password = bcrypt.hashSync(newUser.password, 16);
+    if (req.file) {
+      newUser.image = req.file.path;
+    }
+    
     const savedUser = await newUser.save();
     return savedUser;
+
   } catch (err) {
     magic.LogDanger('User register failed', err);
     return await { err: { code: 123, message: err } };
@@ -55,10 +59,12 @@ exports.Login = async (req) => {
           role: userInDB.role,
         },
         req.app.get('adminSecretKey'),
+
         {
           expiresIn: '1h',
         }
       );
+
       console.log(userToken, adminToken);
       if (userInDB.role === 'admin') {
         return { user: userInDB, token: adminToken };

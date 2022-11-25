@@ -43,9 +43,9 @@ exports.Create = async (req, res) => {
     statuscode = 0,
     response = {};
   try {
-    const { username, nickname, gmail, password, role, department } = req.body;
+    const { username, nickname, gmail, password, role, department, image } = req.body;
     if (username && nickname && gmail && password && role && department) {
-      let resOrm = await ormUser.Create(req.body);
+      let resOrm = await ormUser.Create(req);
       if (resOrm.err) {
         (status = 'Failure'),
           (errorcode = resOrm.err.code),

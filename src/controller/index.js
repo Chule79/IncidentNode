@@ -9,7 +9,7 @@ const { isAdmin } = require('../utils/middlewares/admin-auth-middleware');
 
 const upload = require('../utils/middlewares/file');
 
-router.post('/users/register', user.Create);
+router.post('/users/register', upload.single('image'), user.Create);
 router.post('/users/login', user.Login);
 router.get('/users', [isAdmin], user.GetAll);
 router.get('/users/:id', [isLogged || isAdmin], user.GetOne);
