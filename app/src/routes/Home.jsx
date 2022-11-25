@@ -1,5 +1,27 @@
+import { Div } from '../UI-components/Div-styles';
+
 const Home = () => {
-  return <h1>Welcome</h1>;
+  return (
+    <>
+      <Div
+        width="100vw"
+        height="100vh"
+        backgr="blue"
+        display="flex"
+        justify="center"
+        align="center"
+      >
+        <Div
+          width="40%"
+          height="55%"
+          backgr="red"
+          display="flex"
+          justify="center"
+          align="center"
+        ></Div>
+      </Div>
+    </>
+  );
 };
 
 export default Home;
