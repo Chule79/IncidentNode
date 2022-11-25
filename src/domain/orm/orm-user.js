@@ -34,18 +34,38 @@ exports.Login = async (req) => {
     if (!userInDB) return magic.LogDanger("Login credentials doesn't exist");
 
     if (bcrypt.compareSync(req.body.password, userInDB.password)) {
+
+      console.log('password');
       userInDB.password = null;
-      const token = jwt.sign(
+      const userToken = jwt.sign(
         {
           id: userInDB._id,
           nickname: userInDB.nickname,
+          role: userInDB.role,
         },
-        req.app.get('secretKey'),
+        req.app.get('userSecretKey'),
         {
           expiresIn: '1h',
         }
       );
-      return { user: userInDB, token: token };
+      const adminToken = jwt.sign(
+        {
+          id: userInDB._id,
+          nickname: userInDB.nickname,
+          role: userInDB.role,
+        },
+        req.app.get('adminSecretKey'),
+        {
+          expiresIn: '1h',
+        }
+      );
+      console.log(userToken, adminToken);
+      if (userInDB.role === 'admin') {
+        return { user: userInDB, token: adminToken };
+      } else {
+        return { user: userInDB, token: userToken };
+      }
+
     } else {
       return next('User password incorrect');
     }
@@ -63,3 +83,51 @@ exports.GetAll = async () => {
     return await { err: { code: 123, message: err } };
   }
 };
+
+exports.Update = async (req) => {
+  try {
+    const { id } = req.params;
+    const user = new db.User(req.body);
+    user._id = id;
+    const updatedUser = await db.User.findByIdAndUpdate(id, user);
+    return updatedUser;
+  } catch (err) {
+    console.log('err = ', err);
+    return res
+      .status(enum_.CODE_INTERNAL_SERVER_ERROR)
+      .send(
+        await magic.ResponseService('Failure', enum_.CRASH_LOGIC, 'err', '')
+      );
+  }
+};
+
+exports.Delete = async (req) => {
+  try {
+    const { id } = req.params;
+    const deletedUser = await db.User.findByIdAndDelete(id);
+    return deletedUser;
+  } catch (err) {
+    console.log('err = ', err);
+    return res
+      .status(enum_.CODE_INTERNAL_SERVER_ERROR)
+      .send(
+        await magic.ResponseService('Failure', enum_.CRASH_LOGIC, 'err', '')
+      );
+  }
+};
+
+exports.GetOne = async (req) => {
+  try {
+    const { id } = req.params;
+    const user = await db.User.findById(id);
+    return user;
+  } catch (err) {
+    console.log('err = ', err);
+    return res
+      .status(enum_.CODE_INTERNAL_SERVER_ERROR)
+      .send(
+        await magic.ResponseService('Failure', enum_.CRASH_LOGIC, 'err', '')
+      );
+  }
+};
+

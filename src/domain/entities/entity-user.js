@@ -7,7 +7,9 @@ module.exports = (db) => {
       nickname: { type: String, required: true, unique: true },
       gmail: { type: String, required: true, unique: true },
       password: { type: String, required: true },
-      role: { type: String, required: true },
+
+      role: { type: String, enum: ['user', 'admin'], required: true },
+
       image: { type: String },
       department: {
         type: mongoose.Schema.Types.ObjectId,
@@ -20,11 +22,5 @@ module.exports = (db) => {
       timestamps: true,
     }
   );
-
-  // userSchema.pre('save', function (next) {
-  //   this.password = bcrypt.hashSync(this.password, 16);
-  //   next();
-  // });
-
   return db.model('user', userSchema);
 };
