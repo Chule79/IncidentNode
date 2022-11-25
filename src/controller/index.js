@@ -3,8 +3,10 @@ const user = require('../domain/services/service-user');
 const department = require('../domain/services/service-department');
 const notice = require('../domain/services/service-notice');
 const incident = require('../domain/services/service-incident');
+
 const { isLogged } = require('../utils/middlewares/user-auth-middleware');
 const { isAdmin } = require('../utils/middlewares/admin-auth-middleware');
+
 const upload = require('../utils/middlewares/file');
 
 router.post('/users/register', user.Create);

@@ -34,6 +34,7 @@ exports.Login = async (req) => {
     if (!userInDB) return magic.LogDanger("Login credentials doesn't exist");
 
     if (bcrypt.compareSync(req.body.password, userInDB.password)) {
+
       console.log('password');
       userInDB.password = null;
       const userToken = jwt.sign(
@@ -64,6 +65,7 @@ exports.Login = async (req) => {
       } else {
         return { user: userInDB, token: userToken };
       }
+
     } else {
       return next('User password incorrect');
     }
@@ -128,3 +130,4 @@ exports.GetOne = async (req) => {
       );
   }
 };
+
