@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const StyleAnchor = styled.a`
+export const StyledLabel = styled.label`
   
   ${(props) => {
     const { textalign, borderradius, fontcolor, fontsize } = props;
@@ -13,6 +13,6 @@ export const StyleAnchor = styled.a`
   }}
 `;
 
-export const Anchor = ({ props, text }) => {
-  return <StyleAnchor {...props}>{text}</StyleAnchor>;
+export const Label = ({ props, text }) => {
+  return <StyledLabel {...props}>{text}</StyledLabel>;
 };

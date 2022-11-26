@@ -1,9 +1,6 @@
 import styled, { css } from 'styled-components';
 
 export const StyledImg = styled.img`
-  :hover {
-    transform: scale(1.2);
-  }
   ${(props) => {
     const { width, height, border, borderradius, padding, objectfit, margin } = props;
     return css`
