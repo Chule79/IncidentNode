@@ -7,6 +7,7 @@ import theme from './theme';
 import GlobalStyle from './GlobalStyle';
 import Home from './routes/Home';
 import Root from './routes/Root';
+import Login from './routes/Login';
 
 const router = createBrowserRouter([
   {
@@ -17,11 +18,11 @@ const router = createBrowserRouter([
         path: '',
         element: <Home />,
       },
-      /* {
-        path: 'user',
-        element: <User />,
-      },
       {
+        path: 'login',
+        element: <Login />,
+      },
+      /* {
         path: 'admin',
         element: <Admin />,
       },

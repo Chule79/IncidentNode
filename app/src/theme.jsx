@@ -4,6 +4,7 @@ const theme = {
     secondary: '#393e43',
     highlight: '#3f8ea5',
     background: '#cbd9d9',
+    backgroundCarta: '#b1bcbc',
     popUpBackground: 'rgba(36, 39, 41, 0.66)',
   },
   dark: {
