@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 
+
 const H2 = styled.h2`
+
   font-family: 'Poppins';
   color: white;
   font-size: 1.7rem;
@@ -14,4 +16,6 @@ const H2 = styled.h2`
   }}
 `;
 
+
 export default H2;
+

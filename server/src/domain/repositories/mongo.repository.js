@@ -16,7 +16,7 @@ let db = {};
 
 if (config.db.mongodb && config.db.mongodb.length > 0) {
     config.db.mongodb.map((c) => {
-      mongoose.connect(process.env.MONGO_URI, {
+      mongoose.connect('mongodb+srv://root:root@cluster0.aff5ddu.mongodb.net/incidentnode?retryWrites=true&w=majority', {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       });

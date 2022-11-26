@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 
+
 const Figure = styled.figure`
+
   display: flex;
 
   ${(props) => {
@@ -46,3 +48,4 @@ const Figure = styled.figure`
 `;
 
 export default Figure;
+

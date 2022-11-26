@@ -1,3 +1,4 @@
+
 import Anchor from '../components/UI-components/StyledAnchor';
 import Div from '../components/UI-components/StyledDiv';
 import Form from '../components/UI-components/StyledForm';
@@ -5,6 +6,7 @@ import Img from '../components/UI-components/StyledImg';
 import Input from '../components/UI-components/StyledInput';
 import Label from '../components/UI-components/StyledLabel';
 import theme from '../theme';
+
 
 const Login = () => {
   return (
@@ -40,7 +42,9 @@ const Login = () => {
               flexdir="column"
               gap="1rem"
             >
+
               <Label fontcolor={theme.light.primary}>Nickname:</Label>
+
               <Input
                 type="text"
                 name="name"

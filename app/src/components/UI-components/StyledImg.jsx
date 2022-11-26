@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 
+
 const Img = styled.img`
+
   ${(props) => {
     const { width, height, border, borderradius, padding, objectfit, margin } = props;
     return css`
@@ -16,3 +18,4 @@ const Img = styled.img`
 `;
 
 export default Img;
+
