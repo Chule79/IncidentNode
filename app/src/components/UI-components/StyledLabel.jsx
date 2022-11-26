@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-const StyledLabel = styled.label`
+const Label = styled.label`
   ${(props) => {
     const { textalign, borderradius, fontcolor, fontsize } = props;
     return css`
@@ -12,4 +12,4 @@ const StyledLabel = styled.label`
   }}
 `;
 
-export default StyledLabel;
+export default Label;

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 const StyledInput = styled.input`
   box-sizing: border-box;
-
+  border: none;
   ${(props) => {
     const {
       backgr,

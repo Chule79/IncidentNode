@@ -1,8 +1,9 @@
 import styled, { css } from 'styled-components';
 
-const StyleAnchor = styled.a`
+const Span = styled.span`
   ${(props) => {
     const { textalign, borderradius, fontcolor, fontsize } = props;
+
     return css`
       color: ${fontcolor};
       text-align: ${textalign};
@@ -12,4 +13,4 @@ const StyleAnchor = styled.a`
   }}
 `;
 
-export default StyleAnchor;
+export default Span;
