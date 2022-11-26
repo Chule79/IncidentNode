@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 
-const StyledP = styled.p`
+
+const P = styled.p`
+
   font-family: 'Poppins';
   color: crimson;
   font-size: 1.2rem;
@@ -13,4 +15,6 @@ const StyledP = styled.p`
   }}
 `;
 
-export default StyledP;
+
+export default P;
+

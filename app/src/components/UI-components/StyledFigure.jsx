@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 
-const StyledFigure = styled.figure`
+
+const Figure = styled.figure`
+
   display: flex;
 
   ${(props) => {
@@ -45,4 +47,5 @@ const StyledFigure = styled.figure`
   }}
 `;
 
-export default StyledFigure;
+export default Figure;
+

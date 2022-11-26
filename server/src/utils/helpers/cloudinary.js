@@ -6,9 +6,11 @@ const cloudinary = require("cloudinary");
 
 const setUpCloudinary = () => {
   cloudinary.config({
+
     cloud_name: 'dcssmtpvq',
     api_key: '484369842275712',
     api_secret: 'hBjhmQwPyRylmmFzvsbVjMGAHZw',
+
   });
 };
 

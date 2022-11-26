@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-const Input = styled.input`
+const Form = styled.form`
   box-sizing: border-box;
 
   ${(props) => {
@@ -22,7 +22,6 @@ const Input = styled.input`
       align,
       borderbottom,
       gap,
-      texaling,
     } = props;
     return css`
       background-color: ${backgr};
@@ -42,9 +41,8 @@ const Input = styled.input`
       align-items: ${align};
       border-bottom: ${borderbottom};
       gap: ${gap};
-      text-align: ${texaling};
     `;
   }}
 `;
 
-export default Input;
+export default Form;

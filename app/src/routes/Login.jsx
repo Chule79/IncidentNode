@@ -1,33 +1,30 @@
-import { Div } from '../components/UI-components/Div-styles';
-import { Img } from '../components/UI-components/StyledImg';
-import { Input } from '../components/UI-components/StyledInput';
-import { Form } from '../components/UI-components/StyleForm';
-import { Label } from '../components/UI-components/StyleLabel';
-import { Anchor } from '../components/UI-components/StylesAnchor';
+
+import Anchor from '../components/UI-components/StyledAnchor';
+import Div from '../components/UI-components/StyledDiv';
+import Form from '../components/UI-components/StyledForm';
+import Img from '../components/UI-components/StyledImg';
+import Input from '../components/UI-components/StyledInput';
+import Label from '../components/UI-components/StyledLabel';
+import theme from '../theme';
+
 
 const Login = () => {
   return (
     <>
-      <Div
-        width="100vw"
-        height="100vh"
-        backgr="blue"
-        display="flex"
-        justify="center"
-        align="center"
-      >
+      <Div width="100vw" height="100vh" display="flex" justify="center" align="center" backgr={theme.light.backgroundCarta}>
         <Div
           width="40%"
           height="55%"
-          backgr="red"
+          backgr={theme.light.background}
           display="flex"
           justify="flex-start"
           align="center"
           flexdir="column"
           gap="1rem"
           padding="1rem"
+          borderradius="30px"
         >
-          <Img src="https://res.cloudinary.com/dcssmtpvq/image/upload/v1669457843/Captura-removebg-preview_hcvi20.png" />
+          <Img src="https://res.cloudinary.com/dcssmtpvq/image/upload/v1669457843/Captura-removebg-preview_hcvi20.png" width="80%" />
           <Form
             width="70%"
             display="flex"
@@ -45,7 +42,9 @@ const Login = () => {
               flexdir="column"
               gap="1rem"
             >
-              <Label text={'Nickname:'} />
+
+              <Label fontcolor={theme.light.primary}>Nickname:</Label>
+
               <Input
                 type="text"
                 name="name"
@@ -64,7 +63,7 @@ const Login = () => {
               flexdir="column"
               gap="0.5rem"
             >
-              <Label text={'Contraseña:'} />
+              <Label fontcolor={theme.light.primary}>Contraseña:</Label>
               <Input
                 type="password"
                 name="passw"
@@ -83,13 +82,12 @@ const Login = () => {
               flexdir="row"
               gap="0.5rem"
             >
-              <Div display="flex" flexdir="row" justify="center"
-              align="center">
+              <Div display="flex" flexdir="row" justify="center" align="center">
                 <Input type="checkbox" name="remember" texaling="center" height="30px" />
-                <Label text={'Remember me'} fontcolor="black"/>
+                <Label fontcolor={theme.light.primary}>Remember me</Label>
               </Div>
               <Div>
-                <Anchor text={'Olvidè Contraseña'} />
+                <Anchor fontcolor={theme.light.primary}> Olvidè Contraseña</Anchor>
               </Div>
             </Div>
 
