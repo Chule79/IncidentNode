@@ -22,6 +22,7 @@ const Div = styled.div`
       align,
       borderbottom,
       gap,
+      flex,
     } = props;
     return css`
       background-color: ${backgr};
@@ -41,6 +42,7 @@ const Div = styled.div`
       align-items: ${align};
       border-bottom: ${borderbottom};
       gap: ${gap};
+      flex: ${flex};
     `;
   }}
 `;
