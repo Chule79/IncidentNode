@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const StyledP = styled.p`
+const StyledP = styled.p`
   font-family: 'Poppins';
   color: crimson;
   font-size: 1.2rem;
@@ -13,6 +13,4 @@ export const StyledP = styled.p`
   }}
 `;
 
-export const P = ({ props, text }) => {
-  return <StyledP {...props}>{text}</StyledP>;
-};
+export default StyledP;

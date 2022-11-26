@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const StyledInput = styled.input`
+const StyledInput = styled.input`
   box-sizing: border-box;
 
   ${(props) => {
@@ -47,6 +47,4 @@ export const StyledInput = styled.input`
   }}
 `;
 
-export const Input = (props) => {
-  return <StyledInput {...props}></StyledInput>;
-};
+export default StyledInput;
