@@ -1,9 +1,9 @@
-import { Div } from '../UI-components/Div-styles';
-import { Img } from '../UI-components/StyledImg';
-import { Input } from '../UI-components/StyledInput';
-import { Form } from '../UI-components/StyleForm';
-import { Label } from '../UI-components/StyleLabel';
-import { Anchor } from '../UI-components/StylesAnchor';
+import { Div } from '../components/UI-components/Div-styles';
+import { Img } from '../components/UI-components/StyledImg';
+import { Input } from '../components/UI-components/StyledInput';
+import { Form } from '../components/UI-components/StyleForm';
+import { Label } from '../components/UI-components/StyleLabel';
+import { Anchor } from '../components/UI-components/StylesAnchor';
 
 const Login = () => {
   return (
