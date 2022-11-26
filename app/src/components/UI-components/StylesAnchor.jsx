@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const StyleAnchor = styled.a`
-  
+const StyleAnchor = styled.a`
   ${(props) => {
     const { textalign, borderradius, fontcolor, fontsize } = props;
     return css`
@@ -13,6 +12,4 @@ export const StyleAnchor = styled.a`
   }}
 `;
 
-export const Anchor = ({ props, text }) => {
-  return <StyleAnchor {...props}>{text}</StyleAnchor>;
-};
+export default StyleAnchor;

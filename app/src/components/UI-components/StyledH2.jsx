@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const StyledH2 = styled.h2`
+const StyledH2 = styled.h2`
   font-family: 'Poppins';
   color: white;
   font-size: 1.7rem;
@@ -14,6 +14,4 @@ export const StyledH2 = styled.h2`
   }}
 `;
 
-export const H2 = ({ props, text }) => {
-  return <StyledH2 {...props}>{text}</StyledH2>;
-};
+export default StyledH2;

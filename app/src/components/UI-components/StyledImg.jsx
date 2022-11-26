@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const StyledImg = styled.img`
+const StyledImg = styled.img`
   ${(props) => {
     const { width, height, border, borderradius, padding, objectfit, margin } = props;
     return css`
@@ -15,6 +15,4 @@ export const StyledImg = styled.img`
   }}
 `;
 
-export const Img = (props) => {
-  return <StyledImg {...props}></StyledImg>;
-};
+export default StyledImg;

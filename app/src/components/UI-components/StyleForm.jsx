@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const StyledForm = styled.form`
+const StyledForm = styled.form`
   box-sizing: border-box;
 
   ${(props) => {
@@ -45,6 +45,4 @@ export const StyledForm = styled.form`
   }}
 `;
 
-export const Form = (props) => {
-  return <StyledForm {...props}></StyledForm>;
-};
+export default StyledForm;

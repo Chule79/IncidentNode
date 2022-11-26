@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const StyledFigure = styled.figure`
+const StyledFigure = styled.figure`
   display: flex;
 
   ${(props) => {
@@ -45,6 +45,4 @@ export const StyledFigure = styled.figure`
   }}
 `;
 
-export const Figure = (props) => {
-  return <StyledFigure {...props}></StyledFigure>;
-};
+export default StyledFigure;

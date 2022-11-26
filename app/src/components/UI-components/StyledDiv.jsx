@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const StyledDiv = styled.div`
+const Div = styled.div`
   box-sizing: border-box;
 
   ${(props) => {
@@ -45,6 +45,4 @@ export const StyledDiv = styled.div`
   }}
 `;
 
-export const Div = (props) => {
-  return <StyledDiv {...props}></StyledDiv>;
-};
+export default Div;
