@@ -2,10 +2,7 @@ import styled, { css } from 'styled-components';
 
 
 const H2 = styled.h2`
-
-  font-family: 'Poppins';
-  color: white;
-  font-size: 1.7rem;
+  font-size: 1.3rem;
 
   ${(props) => {
     const { textalign, borderradius } = props;

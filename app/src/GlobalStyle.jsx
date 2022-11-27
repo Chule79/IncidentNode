@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -159,6 +159,9 @@ const GlobalStyle = createGlobalStyle`
   a, button {
     cursor: pointer;
   }
+  a:link, a:visited, a:active {
+    text-decoration:none;
+}
 `;
 
 export default GlobalStyle;

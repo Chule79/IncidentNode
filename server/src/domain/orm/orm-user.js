@@ -95,6 +95,7 @@ exports.Update = async (req) => {
     const { id } = req.params;
     const user = new db.User(req.body);
     user._id = id;
+    user.password = bcrypt.hashSync(user.password, 16);
     const updatedUser = await db.User.findByIdAndUpdate(id, user);
     return updatedUser;
   } catch (err) {
@@ -126,6 +127,21 @@ exports.GetOne = async (req) => {
   try {
     const { id } = req.params;
     const user = await db.User.findById(id);
+    return user;
+  } catch (err) {
+    console.log('err = ', err);
+    return res
+      .status(enum_.CODE_INTERNAL_SERVER_ERROR)
+      .send(
+        await magic.ResponseService('Failure', enum_.CRASH_LOGIC, 'err', '')
+      );
+  }
+};
+
+exports.GetNickname = async (req) => {
+  try {
+    const { nickname } = req.params;
+    const user = await db.User.findOne({nickname:nickname});
     return user;
   } catch (err) {
     console.log('err = ', err);
