@@ -4,6 +4,7 @@ import Form from '../components/UI-components/StyledForm';
 import Img from '../components/UI-components/StyledImg';
 import Input from '../components/UI-components/StyledInput';
 import Label from '../components/UI-components/StyledLabel';
+import { PopRegister } from '../components/PopupR';
 import theme from '../theme';
 
 const Login = () => {

@@ -4,4 +4,6 @@ npm i -D eslint eslint-config-prettier eslint-plugin-import eslint-plugin-jsx-a1
 
 npm i react react-dom react-router-dom styled-components react-icons --save
 
+npm i reactjs-popup
+
 npm i axios
