@@ -3,9 +3,6 @@ import styled from 'styled-components';
 import theme from '../../theme';
 
 const SidebarStyle = styled.nav`
-  position: fixed;
-  top: 0;
-  left: 0;
   height: 100%;
   width: 13rem;
   background-color: ${theme.light.background};

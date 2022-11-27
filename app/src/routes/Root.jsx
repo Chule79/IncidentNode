@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import Navigator from '../components/components/Navigator';
+import Navigator from '../components/Nav';
 
 const Root = () => {
   return (
