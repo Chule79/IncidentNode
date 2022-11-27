@@ -137,3 +137,18 @@ exports.GetOne = async (req) => {
   }
 };
 
+exports.GetNickname = async (req) => {
+  try {
+    const { nickname } = req.params;
+    const user = await db.User.findOne({nickname:nickname});
+    return user;
+  } catch (err) {
+    console.log('err = ', err);
+    return res
+      .status(enum_.CODE_INTERNAL_SERVER_ERROR)
+      .send(
+        await magic.ResponseService('Failure', enum_.CRASH_LOGIC, 'err', '')
+      );
+  }
+};
+

@@ -36,6 +36,17 @@ exports.GetOne = async (req) => {
     return await { err: { code: 123, message: err } };
   }
 };
+exports.GetName = async (req) => {
+  try {
+    const { name } = req.params;
+    const department = await db.Department.findOne({name: name});
+    if (!department) return magic.LogDanger('Cannot get the department');
+    return department;
+  } catch (err) {
+    magic.LogDanger('Cannot get the department', err);
+    return await { err: { code: 123, message: err } };
+  }
+};
 
 exports.Update = async (req) => {
   try {

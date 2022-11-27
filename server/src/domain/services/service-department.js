@@ -108,6 +108,40 @@ exports.GetOne = async (req, res) => {
   }
 };
 
+exports.GetName = async (req, res) => {
+  let status = 'Success';
+  let errorcode = '';
+  let message = '';
+  let data = '';
+  let statuscode = 0;
+  let response = {};
+  try {
+    let resOrm = await ormDepartment.GetName(req);
+    if (resOrm.err) {
+      (status = 'Failure'),
+        (errorcode = resOrm.err.code),
+        (message = resOrm.err.message),
+        (statuscode = enum_.CODE_BAD_REQUEST);
+    } else {
+      (message = 'Success GetOne department'),
+        (data = resOrm),
+        (statuscode =
+          Object.keys(data).length > 0 ? enum_.CODE_OK : enum_.CODE_NO_CONTENT);
+    }
+    response = await magic.ResponseService(status, errorcode, message, data);
+    return res.status(statuscode).send(response);
+  } catch (err) {
+    magic.LogDanger('err: ', err);
+    response = await magic.ResponseService(
+      'Failure',
+      enum_.CODE_BAD_REQUEST,
+      err,
+      ''
+    );
+    return res.status(enum_.CODE_INTERNAL_SERVER_ERROR).send(response);
+  }
+};
+
 exports.Update = async (req, res) => {
   let status = 'Success';
   let errorcode = '';
