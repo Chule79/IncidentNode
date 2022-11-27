@@ -3,10 +3,11 @@ import * as ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
-import theme from './theme';
 import GlobalStyle from './GlobalStyle';
 import Home from './routes/Home';
+import Login from './routes/Login';
 import Root from './routes/Root';
+import theme from './theme';
 
 const router = createBrowserRouter([
   {

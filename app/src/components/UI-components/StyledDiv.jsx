@@ -11,6 +11,7 @@ const Div = styled.div`
       display,
       flexwrap,
       flexdir,
+      gridcolumn,
       objectfit,
       width,
       height,
@@ -19,6 +20,8 @@ const Div = styled.div`
       borderradius,
       padding,
       margin,
+      margTop,
+      margLeft,
       align,
       borderbottom,
       gap,
@@ -31,14 +34,18 @@ const Div = styled.div`
       display: ${display};
       flex-wrap: ${flexwrap};
       flex-direction: ${flexdir};
+      grid-template-columns: ${gridcolumn};
       object-fit: ${objectfit};
       width: ${width};
       height: ${height};
       justify-content: ${justify};
       border-radius: ${borderradius};
       border: ${border};
+      border-radius: ${borderradius};
       padding: ${padding};
       margin: ${margin};
+      margin-top: ${margTop};
+      margin-left: ${margLeft};
       align-items: ${align};
       border-bottom: ${borderbottom};
       gap: ${gap};
