@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 
+
 const H2 = styled.h2`
   font-size: 1.3rem;
 
@@ -12,4 +13,6 @@ const H2 = styled.h2`
   }}
 `;
 
+
 export default H2;
+
