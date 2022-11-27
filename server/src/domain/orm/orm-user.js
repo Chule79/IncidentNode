@@ -7,7 +7,7 @@ const magic = require('../../utils/magic');
 const db = conn.db.connMongo;
 
 exports.Create = async (req) => {
-  try { 
+  try {
     const newUser = new db.User(req.body);
     console.log(newUser);
     const userNickname = await db.User.findOne({ nickname: newUser.nickname });
@@ -18,10 +18,9 @@ exports.Create = async (req) => {
     if (req.file) {
       newUser.image = req.file.path;
     }
-    
+
     const savedUser = await newUser.save();
     return savedUser;
-
   } catch (err) {
     magic.LogDanger('User register failed', err);
     return await { err: { code: 123, message: err } };
@@ -38,40 +37,29 @@ exports.Login = async (req) => {
     if (!userInDB) return magic.LogDanger("Login credentials doesn't exist");
 
     if (bcrypt.compareSync(req.body.password, userInDB.password)) {
-
-      console.log('password');
-      userInDB.password = null;
+      console.log(userInDB);
       const userToken = jwt.sign(
-        {
-          id: userInDB._id,
-          nickname: userInDB.nickname,
-          role: userInDB.role,
-        },
+        { ...userInDB },
         req.app.get('userSecretKey'),
         {
           expiresIn: '1h',
         }
       );
       const adminToken = jwt.sign(
-        {
-          id: userInDB._id,
-          nickname: userInDB.nickname,
-          role: userInDB.role,
-        },
+        { ...userInDB },
         req.app.get('adminSecretKey'),
-
         {
           expiresIn: '1h',
         }
       );
 
-      console.log(userToken, adminToken);
+      userInDB.password = null;
+
       if (userInDB.role === 'admin') {
         return { user: userInDB, token: adminToken };
       } else {
         return { user: userInDB, token: userToken };
       }
-
     } else {
       return next('User password incorrect');
     }
@@ -141,7 +129,7 @@ exports.GetOne = async (req) => {
 exports.GetNickname = async (req) => {
   try {
     const { nickname } = req.params;
-    const user = await db.User.findOne({nickname:nickname});
+    const user = await db.User.findOne({ nickname: nickname });
     return user;
   } catch (err) {
     console.log('err = ', err);
@@ -152,4 +140,3 @@ exports.GetNickname = async (req) => {
       );
   }
 };
-
