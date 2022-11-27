@@ -24,7 +24,6 @@ exports.Create = async (info) => {
   }
 };
 
-
 exports.GetOne = async (req) => {
   try {
     const { id } = req.params;
@@ -39,7 +38,7 @@ exports.GetOne = async (req) => {
 exports.GetName = async (req) => {
   try {
     const { name } = req.params;
-    const department = await db.Department.findOne({name: name});
+    const department = await db.Department.findOne({ name: name });
     if (!department) return magic.LogDanger('Cannot get the department');
     return department;
   } catch (err) {
@@ -51,13 +50,21 @@ exports.GetName = async (req) => {
 exports.Update = async (req) => {
   try {
     const { id } = req.params;
-    const department = new db.Department(req.body);
-    department._id = id;
+
+    const departmentInDB = await db.Department.findById(id);
+
+    const merge = {
+      ...departmentInDB._doc,
+      ...req.body,
+    };
+    const departmentUpdate = new db.Department(merge);
+    departmentUpdate._id = id;
+
     const updatedDepartment = await db.Department.findByIdAndUpdate(
       id,
-      department
+      departmentUpdate
     );
-    console.log(updatedDepartment);
+
     return updatedDepartment;
   } catch (err) {
     magic.LogDanger('Cannot update the department', err);
@@ -75,4 +82,3 @@ exports.Delete = async (req) => {
     return await { err: { code: 123, message: err } };
   }
 };
-
