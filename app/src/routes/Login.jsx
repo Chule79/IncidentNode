@@ -1,4 +1,4 @@
-
+import { PopRegister } from '../components/PopupR';
 import Anchor from '../components/UI-components/StyledAnchor';
 import Div from '../components/UI-components/StyledDiv';
 import Form from '../components/UI-components/StyledForm';
@@ -7,11 +7,17 @@ import Input from '../components/UI-components/StyledInput';
 import Label from '../components/UI-components/StyledLabel';
 import theme from '../theme';
 
-
 const Login = () => {
   return (
     <>
-      <Div width="100vw" height="100vh" display="flex" justify="center" align="center" backgr={theme.light.backgroundCarta}>
+      <Div
+        width="100vw"
+        height="100vh"
+        display="flex"
+        justify="center"
+        align="center"
+        backgr={theme.light.backgroundCarta}
+      >
         <Div
           width="40%"
           height="55%"
@@ -24,7 +30,10 @@ const Login = () => {
           padding="1rem"
           borderradius="30px"
         >
-          <Img src="https://res.cloudinary.com/dcssmtpvq/image/upload/v1669457843/Captura-removebg-preview_hcvi20.png" width="80%" />
+          <Img
+            src="https://res.cloudinary.com/dcssmtpvq/image/upload/v1669457843/Captura-removebg-preview_hcvi20.png"
+            width="80%"
+          />
           <Form
             width="70%"
             display="flex"
@@ -42,13 +51,13 @@ const Login = () => {
               flexdir="column"
               gap="1rem"
             >
-
               <Label fontcolor={theme.light.primary}>Nickname:</Label>
 
               <Input
                 type="text"
                 name="name"
                 width="70%"
+                border="none"
                 borderradius="20px"
                 texaling="center"
                 height="30px"
@@ -69,6 +78,7 @@ const Login = () => {
                 name="passw"
                 id="password"
                 width="70%"
+                border="none"
                 borderradius="20px"
                 texaling="center"
                 height="30px"
@@ -94,12 +104,14 @@ const Login = () => {
             <Input
               type="submit"
               value="Iniciar sesión"
-              width="40%"
+              width="8rem"
+              border="none"
               borderradius="20px"
               texaling="center"
               height="30px"
             />
           </Form>
+          <PopRegister />
         </Div>
       </Div>
     </>
