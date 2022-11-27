@@ -56,6 +56,7 @@ const Login = () => {
                 type="text"
                 name="name"
                 width="70%"
+                border="none"
                 borderradius="20px"
                 texaling="center"
                 height="30px"
@@ -76,6 +77,7 @@ const Login = () => {
                 name="passw"
                 id="password"
                 width="70%"
+                border="none"
                 borderradius="20px"
                 texaling="center"
                 height="30px"
@@ -101,12 +103,14 @@ const Login = () => {
             <Input
               type="submit"
               value="Iniciar sesión"
-              width="40%"
+              width="8rem"
+              border="none"
               borderradius="20px"
               texaling="center"
               height="30px"
             />
           </Form>
+          <PopRegister />
         </Div>
       </Div>
     </>
