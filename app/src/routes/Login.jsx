@@ -1,4 +1,3 @@
-import { PopRegister } from '../components/PopupR';
 import Anchor from '../components/UI-components/StyledAnchor';
 import Div from '../components/UI-components/StyledDiv';
 import Form from '../components/UI-components/StyledForm';
