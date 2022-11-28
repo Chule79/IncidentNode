@@ -14,7 +14,7 @@ exports.Create = async (req) => {
     const userGmail = await db.User.findOne({ gmail: newUser.gmail });
     const userExists = userNickname || userGmail;
     if (userExists) return magic.LogDanger('That user already exists');
-    newUser.password = bcrypt.hashSync(newUser.password, 16);
+    newUser.password = bcrypt.hashSync(newUser.password, 6);
     if (req.file) {
       newUser.image = req.file.path;
     }
@@ -129,9 +129,7 @@ exports.GetOne = async (req) => {
 exports.GetNickname = async (req) => {
   try {
     const { nickname } = req.params;
-
     const user = await db.User.findOne({ nickname: nickname });
-
     return user;
   } catch (err) {
     console.log('err = ', err);
@@ -142,4 +140,3 @@ exports.GetNickname = async (req) => {
       );
   }
 };
-
