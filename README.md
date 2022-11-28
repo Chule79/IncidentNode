@@ -12,12 +12,11 @@ npm i -D eslint eslint-config-prettier prettier nodemon jest supertest
 Nuestro proyecto consiste en la creación de un backend para una aplicación de tratamiento y seguimiento de incidencias. Enfocado en empresas divididas por departamentos, en la cual se podrá informar a los administradores y grupo de reparaciones a través de la app de cualquier tipo de avería, introduciendo el puesto de departamento,  una descripción breve y con la posibilidad de adjuntar posibles imágenes de la avería o problema en cuestión.
 
 # 🧩 Arquitectura Hexagonal
- ![Hexagonal Architecture (https://res.cloudinary.com/dcssmtpvq/image/upload/v1669663585/hex_architecture_wrexzv.png)]
---- 
 
+--- 
 Para este proyecto hemos decido implementar un diseño de software de Arquitectura Hexagonal con NodeJS. Esto nos permite construir un proyecto mantenible y elimina la necesidad de cambiar el código central, reemplazando esto por la modificación de componentes, creando así mayor estabilidad.
 
-![hex_architecture.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ade58ad5-71ea-46e3-ba45-dcc339062669/hex_architecture.png)
+![hex_architecture.png](https://res.cloudinary.com/dcssmtpvq/image/upload/v1669663585/hex_architecture_wrexzv.png)
 
 # 🧩 Dependencias
 
