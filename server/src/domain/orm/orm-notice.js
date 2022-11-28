@@ -38,10 +38,20 @@ exports.GetOne = async (req) => {
 exports.Update = async (req) => {
   try {
     const { id } = req.params;
-    const notice = await new db.Notice(req.body);
-    notice._id = id;
-    console.log(notice);
-    const updateNotice = await db.Notice.findByIdAndUpdate(id, notice);
+
+    const noticeInDB = await db.Notice.findById(id);
+
+    const merge = {
+      ...noticeInDB._doc,
+      ...req.body,
+    };
+    const noticeUpdate = new db.Notice(merge);
+    noticeUpdate._id = id;
+
+    const updateNotice = await db.Notice.findByIdAndUpdate(
+      id,
+      noticeUpdate
+    );
     return updateNotice;
   } catch (err) {
     magic.LogDanger('Cannot update notice', err);

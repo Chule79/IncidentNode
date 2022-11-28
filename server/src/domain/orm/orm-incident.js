@@ -32,9 +32,20 @@ exports.GetOne = async (req) => {
 exports.Update = async (req) => {
   try {
     const { id } = req.params;
-    const incident = new db.Incident(req.body);
-    incident._id = id;
-    const updateIncident = await db.Incident.findByIdAndUpdate(id, incident);
+
+    const incidentInDB = await db.Incident.findById(id);
+
+    const merge = {
+      ...incidentInDB._doc,
+      ...req.body,
+    };
+    const incidentUpdate = new db.Incident(merge);
+    incidentUpdate._id = id;
+
+    const updateIncident = await db.Incident.findByIdAndUpdate(
+      id,
+      incidentUpdate
+    );
     return updateIncident;
   } catch (error) {
     magic.LogDanger('Cannot getAll incidents', err);
